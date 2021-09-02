@@ -13,6 +13,12 @@ class Login extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.disabledButton = this.disabledButton.bind(this);
     this.startGame = this.startGame.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const { history } = this.props;
+    history.push('/config');
   }
 
   handleChange({ target }) {
@@ -73,6 +79,13 @@ class Login extends React.Component {
           >
             Jogar
           </button>
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ this.handleClick }
+        >
+          Configurações
+        </button>
         </form>
       </div>
     );

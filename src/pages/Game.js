@@ -11,4 +11,4 @@ class Game extends React.Component {
   }
 }
 
-export default connect()(Game);
+export default connect(null, null)(Game);
