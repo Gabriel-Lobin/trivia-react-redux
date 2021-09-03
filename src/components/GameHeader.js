@@ -21,7 +21,7 @@ class GameHeader extends Component {
   render() {
     const { nome } = this.props;
     return (
-      <div>
+      <header>
         <img
           data-testid="header-profile-picture"
           src={ this.localStorageValidation() }
@@ -29,7 +29,7 @@ class GameHeader extends Component {
         />
         <h2 data-testid="header-player-name">{nome}</h2>
         <h2 data-testid="header-score">0</h2>
-      </div>
+      </header>
     );
   }
 }

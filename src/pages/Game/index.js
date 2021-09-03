@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
+import GameHeader from '../../components/GameHeader';
 import Question from '../../components/Question';
 
 import './style.css';
@@ -14,11 +16,7 @@ class Game extends React.Component {
 
   renderQuestion() {
     const { questions } = this.props;
-    console.log(questions);
-    if (questions.length) {
-      return true;
-    }
-    return false;
+    return !!questions.length;
   }
 
   render() {
@@ -26,16 +24,23 @@ class Game extends React.Component {
     const { currentQuestion } = this.state;
 
     return (
-      <main className="game-screen">
-        {
-          this.renderQuestion()
-            ? <Question data={ questions[currentQuestion] } />
-            : <h1>Loading...</h1>
-        }
-      </main>
+      <>
+        <GameHeader />
+        <main className="game-screen">
+          {
+            this.renderQuestion()
+              ? <Question data={ questions[currentQuestion] } />
+              : <h1>Loading...</h1>
+          }
+        </main>
+      </>
     );
   }
 }
+
+Game.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 const mapStateToProps = (state) => ({
   questions: state.questions.data,
