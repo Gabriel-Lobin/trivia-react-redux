@@ -45,11 +45,9 @@ class Login extends React.Component {
   }
 
   startGame() {
-    const { history, gameStart, saveData, token } = this.props;
+    const { history, gameStart, saveData } = this.props;
     saveData(this.state);
     gameStart();
-
-    if (token) history.push('/game');
   }
 
   render() {
