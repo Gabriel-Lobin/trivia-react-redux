@@ -37,10 +37,9 @@ class Login extends React.Component {
   }
 
   startGame() {
-    const { history, gameStart, saveData, token } = this.props;
+    const { history, gameStart, saveData } = this.props;
     saveData(this.state);
     gameStart();
-    localStorage.setItem('token', token);
     history.push('/game');
   }
 
@@ -107,7 +106,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  token: state.player.token,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

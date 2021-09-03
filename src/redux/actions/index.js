@@ -13,5 +13,6 @@ export const fetchSuccess = (token) => ({
 export const fetchStartThunk = () => async (dispatch) => {
   const response = await fetch('https://opentdb.com/api_token.php?command=request');
   const { token } = await response.json();
+  localStorage.setItem('token', token);
   dispatch(fetchSuccess(token));
 };
