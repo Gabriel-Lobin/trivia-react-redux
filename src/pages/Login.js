@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchStartThunk, saveFormData } from '../redux/actions';
+import { fetchQuestionsThunk, fetchStartThunk, saveFormData } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -17,10 +17,11 @@ class Login extends React.Component {
   }
 
   componentDidUpdate() {
-    const { token, history } = this.props;
+    const { token, history, getQuestions } = this.props;
     if (token) {
-      history.push('/game');
+      getQuestions({ token });
       localStorage.setItem('token', token);
+      history.push('/game');
     }
   }
 
@@ -104,6 +105,7 @@ Login.defaultProptype = {
 
 Login.propTypes = {
   gameStart: PropTypes.func.isRequired,
+  getQuestions: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
@@ -112,6 +114,7 @@ Login.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  getQuestions: ({ token }) => dispatch(fetchQuestionsThunk({ token })),
   saveData: (state) => dispatch(saveFormData(state)),
   gameStart: () => dispatch(fetchStartThunk()),
 });
