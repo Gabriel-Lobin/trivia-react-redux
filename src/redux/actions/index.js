@@ -30,5 +30,6 @@ export const fetchQuestionsThunk = ({ amount = BASE_AMOUNT, token }) => (
 export const fetchStartThunk = () => async (dispatch) => {
   const response = await fetch(GET_TOKEN_URL);
   const { token } = await response.json();
+  localStorage.setItem('token', token);
   dispatch(fetchSuccess(token));
 };

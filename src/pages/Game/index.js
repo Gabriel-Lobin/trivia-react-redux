@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Question from '../../components/Question';
-import { fetchQuestionsThunk } from '../../redux/actions';
 
 import './style.css';
 

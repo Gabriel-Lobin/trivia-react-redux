@@ -59,7 +59,11 @@ class Question extends Component {
         </section>
         <section className="answers">
           {answers.map((answer, index) => (
-            <button key={ index } type="button">
+            <button
+              data-testid={ answer.correct ? 'correct-answer' : `wrong-answer${index}` }
+              key={ index }
+              type="button"
+            >
               {answer.value}
             </button>
           ))}
