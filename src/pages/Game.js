@@ -13,4 +13,8 @@ class Game extends React.Component {
   }
 }
 
-export default connect(null, null)(Game);
+const mapStateToProps = (state) => ({
+  token: state.player.token,
+});
+
+export default connect(mapStateToProps, null)(Game);

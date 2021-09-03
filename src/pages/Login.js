@@ -16,6 +16,14 @@ class Login extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidUpdate() {
+    const { token, history } = this.props;
+    if (token) {
+      history.push('/game');
+      localStorage.setItem('token', token);
+    }
+  }
+
   handleClick() {
     const { history } = this.props;
     history.push('/config');
@@ -37,10 +45,9 @@ class Login extends React.Component {
   }
 
   startGame() {
-    const { history, gameStart, saveData } = this.props;
+    const { gameStart, saveData } = this.props;
     saveData(this.state);
     gameStart();
-    history.push('/game');
   }
 
   render() {
@@ -78,13 +85,13 @@ class Login extends React.Component {
           >
             Jogar
           </button>
-        <button
-          type="button"
-          data-testid="btn-settings"
-          onClick={ this.handleClick }
-        >
-          Configurações
-        </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ this.handleClick }
+          >
+            Configurações
+          </button>
         </form>
       </div>
     );
@@ -106,6 +113,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
+  token: state.player.token,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
