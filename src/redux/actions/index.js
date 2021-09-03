@@ -1,4 +1,13 @@
-import { FETCH_SUCCESS, SAVE_DATA } from './actionTypes';
+import { FETCH_QUESTIONS, FETCH_SUCCESS, SAVE_DATA } from './actionTypes';
+
+const BASE_URL = 'https://opentdb.com/api.php';
+const GET_TOKEN_URL = 'https://opentdb.com/api_token.php?command=request';
+const BASE_AMOUNT = 5;
+
+export const fetchQuestions = (questions) => ({
+  type: FETCH_QUESTIONS,
+  questions,
+});
 
 export const saveFormData = (state) => ({
   type: SAVE_DATA,
@@ -10,8 +19,17 @@ export const fetchSuccess = (token) => ({
   token,
 });
 
+export const fetchQuestionsThunk = ({ amount = BASE_AMOUNT, token }) => (
+  async (dispatch) => {
+    const buffer = await fetch(`${BASE_URL}?amount=${amount}&token=${token}`);
+    const response = await buffer.json();
+    console.log(token, response);
+    dispatch(fetchQuestions(response.results));
+  }
+);
 export const fetchStartThunk = () => async (dispatch) => {
-  const response = await fetch('https://opentdb.com/api_token.php?command=request');
-  const { token } = await response.json();
+  const response = await fetch(GET_TOKEN_URL);
+  const { token, ...data } = await response.json();
+  console.log(token, data);
   dispatch(fetchSuccess(token));
 };
