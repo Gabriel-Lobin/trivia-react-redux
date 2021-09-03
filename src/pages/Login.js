@@ -45,7 +45,7 @@ class Login extends React.Component {
   }
 
   startGame() {
-    const { history, gameStart, saveData } = this.props;
+    const { gameStart, saveData } = this.props;
     saveData(this.state);
     gameStart();
   }
@@ -97,6 +97,10 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.defaultProptype = {
+  login: '',
+};
 
 Login.propTypes = {
   gameStart: PropTypes.func.isRequired,
