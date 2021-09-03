@@ -79,13 +79,13 @@ class Login extends React.Component {
           >
             Jogar
           </button>
-        <button
-          type="button"
-          data-testid="btn-settings"
-          onClick={ this.handleClick }
-        >
-          Configurações
-        </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ this.handleClick }
+          >
+            Configurações
+          </button>
         </form>
       </div>
     );
@@ -107,7 +107,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  token: state.player.token,
+  token: state.player.token || '',
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
