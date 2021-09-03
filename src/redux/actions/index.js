@@ -4,9 +4,9 @@ const BASE_URL = 'https://opentdb.com/api.php';
 const GET_TOKEN_URL = 'https://opentdb.com/api_token.php?command=request';
 const BASE_AMOUNT = 5;
 
-export const fetchQuestions = (questions) => ({
+export const fetchQuestions = (data) => ({
   type: FETCH_QUESTIONS,
-  questions,
+  data,
 });
 
 export const saveFormData = (state) => ({
@@ -29,7 +29,6 @@ export const fetchQuestionsThunk = ({ amount = BASE_AMOUNT, token }) => (
 );
 export const fetchStartThunk = () => async (dispatch) => {
   const response = await fetch(GET_TOKEN_URL);
-  const { token, ...data } = await response.json();
-  console.log(token, data);
+  const { token } = await response.json();
   dispatch(fetchSuccess(token));
 };

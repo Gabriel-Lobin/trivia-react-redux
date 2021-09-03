@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Question from '../../components/Question';
 import { fetchQuestionsThunk } from '../../redux/actions';
 
 import './style.css';
@@ -7,45 +8,38 @@ import './style.css';
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentQuestion: 0,
+    };
   }
 
-  componentDidMount() {
-    const { token, getQuestions } = this.props;
-    if (token) getQuestions({ token });
+  renderQuestion() {
+    const { questions } = this.props;
+    console.log(questions);
+    if (questions.length) {
+      return true;
+    }
+    return false;
   }
 
   render() {
-    console.log('Questions', this.props.questions);
+    const { questions } = this.props;
+    const { currentQuestion } = this.state;
+
     return (
       <main className="game-screen">
-        <section className="questions">
-          <div className="question-container">
-            <span data-testid="question-category" className="question-category">
-              Placeholder
-            </span>
-            <p className="question">Placeholder</p>
-          </div>
-          <div className="timer">30s</div>
-        </section>
-        <section className="answers">
-          <button type="button">Placeholder</button>
-          <button type="button">Placeholder</button>
-          <button type="button">Placeholder</button>
-          <button type="button">Placeholder</button>
-        </section>
+        {
+          this.renderQuestion()
+            ? <Question data={ questions[currentQuestion] } />
+            : <h1>Loading...</h1>
+        }
       </main>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getQuestions: (token) => dispatch(fetchQuestionsThunk({ token })),
-});
-
 const mapStateToProps = (state) => ({
-  token: state.player.token,
-  questions: state.player.questions,
+  questions: state.questions.data,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, null)(Game);
