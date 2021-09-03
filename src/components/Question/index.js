@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Question extends Component {
   constructor(props) {
@@ -10,18 +11,21 @@ class Question extends Component {
   }
 
   componentDidMount() {
-    const { data: { incorrect_answers, correct_answer } } = this.props;
-    this.setAnswers(incorrect_answers, correct_answer);
+    const {
+      data: {
+        incorrect_answers: incorrectAnswers, correct_answer: correctAnswer,
+      } } = this.props;
+    this.setAnswers(incorrectAnswers, correctAnswer);
   }
 
-  setAnswers(incorrect_answers, correct_answer) {
+  setAnswers(incorrectAnswers, correctAnswer) {
     this.setState({
       answers: [
         {
-          value: correct_answer,
+          value: correctAnswer,
           correct: true,
         },
-        ...incorrect_answers.map((incAnswer) => ({
+        ...incorrectAnswers.map((incAnswer) => ({
           value: incAnswer,
           correct: false,
         })),
@@ -72,5 +76,14 @@ class Question extends Component {
     );
   }
 }
+
+Question.propTypes = {
+  data: PropTypes.shape({
+    category: PropTypes.string,
+    question: PropTypes.string,
+    incorrect_answers: PropTypes.arrayOf(PropTypes.string),
+    correct_answer: PropTypes.string,
+  }).isRequired,
+};
 
 export default Question;
