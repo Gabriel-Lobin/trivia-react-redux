@@ -98,6 +98,10 @@ class Login extends React.Component {
   }
 }
 
+Login.defaultProptype = {
+  login: '',
+};
+
 Login.propTypes = {
   gameStart: PropTypes.func.isRequired,
   history: PropTypes.shape({
