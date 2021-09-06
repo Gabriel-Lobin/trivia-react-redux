@@ -8,6 +8,7 @@ class Question extends Component {
       answers: [],
     };
     this.setAnswers = this.setAnswers.bind(this);
+    this.changeAnswers = this.changeAnswers.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +34,17 @@ class Question extends Component {
     });
   }
 
+  changeAnswers() {
+    const { time } = this.props;
+    if (time === 0) {
+      const {
+        data: {
+          incorrect_answers: incorrectAnswers, correct_answer: correctAnswer,
+        } } = this.props;
+      this.setAnswers(incorrectAnswers, correctAnswer);
+    }
+  }
+
   // category: 'General Knowledge',
   // type: 'multiple',
   // difficulty: 'hard',
@@ -46,8 +58,7 @@ class Question extends Component {
 
   render() {
     const { answers } = this.state;
-    const { data: { category, question } } = this.props;
-
+    const { data: { category, question }, time } = this.props;
     return (
       <>
         <section className="questions">
@@ -59,13 +70,13 @@ class Question extends Component {
               {question}
             </p>
           </div>
-          <div className="timer">30s</div>
+          <div className="timer">{`${time}s`}</div>
         </section>
         <section className="answers">
           {answers.map((answer, index) => (
             <button
-              data-testid={ answer.correct ? 'correct-answer' : `wrong-answer${index}` }
-              key={ index }
+              data-testid={answer.correct ? 'correct-answer' : `wrong-answer${index}`}
+              key={index}
               type="button"
             >
               {answer.value}
