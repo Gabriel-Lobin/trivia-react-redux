@@ -7,31 +7,26 @@ import Question from '../../components/Question';
 import './style.css';
 
 class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentQuestion: 0,
-    };
-  }
-
   renderQuestion() {
     const { questions } = this.props;
     return !!questions.length;
   }
 
   render() {
-    const { questions } = this.props;
-    const { currentQuestion } = this.state;
+    const { questions, currentQuestion } = this.props;
 
     return (
       <>
         <GameHeader />
         <main className="game-screen">
-          {
-            this.renderQuestion()
-              ? <Question data={ questions[currentQuestion] } />
-              : <h1>Loading...</h1>
-          }
+          {this.renderQuestion() ? (
+            <Question
+              nextQuestion={ this.nextQuestion }
+              data={ questions[currentQuestion] }
+            />
+          ) : (
+            <h1>Loading...</h1>
+          )}
         </main>
       </>
     );
@@ -39,11 +34,13 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
+  currentQuestion: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   questions: state.questions.data,
+  currentQuestion: state.questions.currentQuestion,
 });
 
 export default connect(mapStateToProps, null)(Game);

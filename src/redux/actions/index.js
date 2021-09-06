@@ -1,4 +1,12 @@
-import { FETCH_QUESTIONS, FETCH_SUCCESS, SAVE_DATA } from './actionTypes';
+import {
+  FETCH_QUESTIONS,
+  FETCH_SUCCESS,
+  SAVE_DATA,
+  UPDATE_SECOND,
+  NEXT_QUESTION,
+  START_CRONOMETER,
+  STOP_CRONOMETER,
+} from './actionTypes';
 
 const BASE_URL = 'https://opentdb.com/api.php';
 const GET_TOKEN_URL = 'https://opentdb.com/api_token.php?command=request';
@@ -17,6 +25,23 @@ export const saveFormData = (state) => ({
 export const fetchSuccess = (token) => ({
   type: FETCH_SUCCESS,
   token,
+});
+
+export const updateSeconds = () => ({
+  type: UPDATE_SECOND,
+});
+
+export const nextQuestions = (currentQuestion) => ({
+  type: NEXT_QUESTION,
+  currentQuestion,
+});
+
+export const startCronometer = () => ({
+  type: START_CRONOMETER,
+});
+
+export const stopCronometer = () => ({
+  type: STOP_CRONOMETER,
 });
 
 export const fetchQuestionsThunk = ({ amount = BASE_AMOUNT, token }) => (
