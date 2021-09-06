@@ -34,6 +34,7 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
+  currentQuestion: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

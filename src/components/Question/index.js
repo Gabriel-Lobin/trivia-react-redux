@@ -43,7 +43,7 @@ class Question extends Component {
         question,
         incorrect_answers: incorrectAnswers,
         correct_answer: correctAnswer,
-      }
+      },
     } = this.props;
     return (
       <>

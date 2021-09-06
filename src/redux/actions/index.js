@@ -1,5 +1,5 @@
-import { 
-  FETCH_QUESTIONS, 
+import {
+  FETCH_QUESTIONS,
   FETCH_SUCCESS,
   SAVE_DATA,
   UPDATE_SECOND,
@@ -28,7 +28,7 @@ export const fetchSuccess = (token) => ({
 });
 
 export const updateSeconds = () => ({
-  type: UPDATE_SECOND,  
+  type: UPDATE_SECOND,
 });
 
 export const nextQuestions = (currentQuestion) => ({
