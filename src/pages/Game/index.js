@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GameHeader from '../../components/GameHeader';
 import Question from '../../components/Question';
+import Timer from '../../components/Timer';
 
 import './style.css';
 
@@ -14,35 +15,11 @@ class Game extends React.Component {
       time: 3,
     };
 
-    this.stopInterval = this.stopInterval.bind(this);
+    this.nextQuestion = this.nextQuestion.bind(this);
   }
 
-  componentDidMount() {
-    const ONE_SECOND = 1000;
-    const INITIAL_TIME = 4;
-    const MAX_QUESTION = 4;
-    const cronometro = setInterval(() => {
-      const { time, currentQuestion } = this.state;
-
-      if (currentQuestion >= MAX_QUESTION && time === 1) {
-        this.setState({ time: 0 });
-        this.stopInterval(cronometro);
-      } else {
-        if (time === 0) {
-          this.setState((state) => ({
-            time: state.time + INITIAL_TIME,
-            currentQuestion: state.currentQuestion + 1,
-          }));
-        }
-        this.setState((state) => ({
-          time: state.time - 1,
-        }));
-      }
-    }, ONE_SECOND);
-  }
-
-  stopInterval(cronometro) {
-    clearInterval(cronometro);
+  nextQuestion() {
+    this.setState((state) => ({ time: 4, currentQuestion: state.currentQuestion + 1 }));
   }
 
   renderQuestion() {
@@ -58,11 +35,15 @@ class Game extends React.Component {
       <>
         <GameHeader />
         <main className="game-screen">
-          {
-            this.renderQuestion()
-              ? <Question data={ questions[currentQuestion] } time={ time } />
-              : <h1>Loading...</h1>
-          }
+          {this.renderQuestion() ? (
+            <Question
+              nextQuestion={ this.nextQuestion }
+              data={ questions[currentQuestion] }
+              time={ time }
+            />
+          ) : (
+            <h1>Loading...</h1>
+          )}
         </main>
       </>
     );

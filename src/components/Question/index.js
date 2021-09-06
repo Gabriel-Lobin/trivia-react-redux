@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Answers from '../Answers';
+import Timer from '../Timer';
 
 class Question extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      answers: [],
-    };
     this.setAnswers = this.setAnswers.bind(this);
-    this.changeAnswers = this.changeAnswers.bind(this);
   }
 
   componentDidMount() {
-    const {
-      data: {
-        incorrect_answers: incorrectAnswers, correct_answer: correctAnswer,
-      } } = this.props;
-    this.setAnswers(incorrectAnswers, correctAnswer);
+    this.setAnswers();
   }
 
   setAnswers(incorrectAnswers, correctAnswer) {
-    this.setState({
-      answers: [
+    if (incorrectAnswers || correctAnswer) {
+      return [
         {
           value: correctAnswer,
           correct: true,
@@ -30,19 +24,9 @@ class Question extends Component {
           value: incAnswer,
           correct: false,
         })),
-      ],
-    });
-  }
-
-  changeAnswers() {
-    const { time } = this.props;
-    if (time === 0) {
-      const {
-        data: {
-          incorrect_answers: incorrectAnswers, correct_answer: correctAnswer,
-        } } = this.props;
-      this.setAnswers(incorrectAnswers, correctAnswer);
+      ];
     }
+    return [];
   }
 
   // category: 'General Knowledge',
@@ -57,10 +41,19 @@ class Question extends Component {
   // ]
 
   render() {
-    const { answers } = this.state;
-    const { data: { category, question }, time } = this.props;
+    const {
+      data: {
+        category,
+        question,
+        incorrect_answers: incorrectAnswers,
+        correct_answer: correctAnswer,
+      },
+      time,
+      nextQuestion,
+    } = this.props;
     return (
       <>
+        <Timer startValue={ time } />
         <section className="questions">
           <div className="question-container">
             <span data-testid="question-category" className="question-category">
@@ -70,19 +63,11 @@ class Question extends Component {
               {question}
             </p>
           </div>
-          <div className="timer">{`${time}s`}</div>
         </section>
-        <section className="answers">
-          {answers.map((answer, index) => (
-            <button
-              data-testid={answer.correct ? 'correct-answer' : `wrong-answer${index}`}
-              key={index}
-              type="button"
-            >
-              {answer.value}
-            </button>
-          ))}
-        </section>
+        <Answers
+          answers={ this.setAnswers(incorrectAnswers, correctAnswer) }
+          nextQuestion={ nextQuestion }
+        />
       </>
     );
   }
