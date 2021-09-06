@@ -3,33 +3,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GameHeader from '../../components/GameHeader';
 import Question from '../../components/Question';
-import Timer from '../../components/Timer';
 
 import './style.css';
 
 class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentQuestion: 0,
-      time: 3,
-    };
-
-    this.nextQuestion = this.nextQuestion.bind(this);
-  }
-
-  nextQuestion() {
-    this.setState((state) => ({ time: 4, currentQuestion: state.currentQuestion + 1 }));
-  }
-
   renderQuestion() {
     const { questions } = this.props;
     return !!questions.length;
   }
 
   render() {
-    const { questions } = this.props;
-    const { currentQuestion, time } = this.state;
+    const { questions, currentQuestion } = this.props;
 
     return (
       <>
@@ -39,7 +23,6 @@ class Game extends React.Component {
             <Question
               nextQuestion={ this.nextQuestion }
               data={ questions[currentQuestion] }
-              time={ time }
             />
           ) : (
             <h1>Loading...</h1>
@@ -56,6 +39,7 @@ Game.propTypes = {
 
 const mapStateToProps = (state) => ({
   questions: state.questions.data,
+  currentQuestion: state.questions.currentQuestion,
 });
 
 export default connect(mapStateToProps, null)(Game);

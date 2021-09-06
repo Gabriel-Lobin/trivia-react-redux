@@ -1,42 +1,52 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateSeconds, stopCronometer } from '../../redux/actions/index';
 
-export default class Timer extends Component {
+class Timer extends Component {
   constructor(props) {
     super(props);
     const { startValue } = this.props;
     this.state = {
       time: startValue,
     };
-    this.chronometer = null;
-    this.stopInterval = this.stopInterval.bind(this);
-  }
-
-  componentDidMount() {
-    this.startChronometer();
   }
 
   startChronometer() {
-    const INTERVAL = 1000;
-
+    const INTERVAL = 1000;    
     this.chronometer = setInterval(() => {
-      const { time } = this.state;
-      if (time === 0) {
-        this.stopInterval();
-      } else {
-        this.setState((state) => ({
-          time: state.time - 1,
-        }));
+      const { updateSecond, time } = this.props;
+      if (time > 0) { updateSecond() }
+      else {
+        clearInterval(this.chronometer);
       }
     }, INTERVAL);
   }
 
-  stopInterval() {
-    clearInterval(this.chronometer);
-  }
+  async cronometer() {
+    const { stopCronometer } = this.props;
+    await stopCronometer();
+    await this.startChronometer();
+  };
 
   render() {
-    const { time } = this.state;
-
-    return (<div className="timer">{`${time}s`}</div>);
+    const { test } = this.state;
+    const { time, timer } = this.props;
+    { timer && this.cronometer() }
+    return (
+      <div className="timer">{`${time}s`}</div>
+    );
   }
 }
+
+const mapStateToProps = (state) => ({
+  time: state.questions.time,
+  timer: state.questions.timer,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateSecond: () => dispatch(updateSeconds()),
+  stopCronometer: () => dispatch(stopCronometer()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timer);
+

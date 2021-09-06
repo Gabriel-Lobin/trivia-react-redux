@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { nextQuestions, startCronometer } from '../../redux/actions';
 
-export default class Answers extends Component {
+class Answers extends Component {
   render() {
-    const { answers, nextQuestion } = this.props;
-    console.log(answers);
+    const { answers, nextQuestion, startCronometerTime, currentQuestion, time } = this.props;
     return (
       <section className="answers">
         {answers.map((answer, index) => (
           <button
+            disabled={ time > 0 ? false : true }
             data-testid={
               answer.correct ? 'correct-answer' : `wrong-answer${index}`
             }
@@ -18,8 +20,10 @@ export default class Answers extends Component {
           </button>
         ))}
         <button
-          onClick={ () => {
-            nextQuestion();
+          disabled={ currentQuestion < 4 ? false : true }
+          onClick={() => {
+              nextQuestion();
+              startCronometerTime();
           } }
           type="button"
         >
@@ -29,3 +33,15 @@ export default class Answers extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  currentQuestion: state.questions.currentQuestion,
+  time: state.questions.time,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  nextQuestion: () => dispatch(nextQuestions()),
+  startCronometerTime: () => dispatch(startCronometer()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Answers);

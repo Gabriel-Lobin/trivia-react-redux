@@ -9,10 +9,6 @@ class Question extends Component {
     this.setAnswers = this.setAnswers.bind(this);
   }
 
-  componentDidMount() {
-    this.setAnswers();
-  }
-
   setAnswers(incorrectAnswers, correctAnswer) {
     if (incorrectAnswers || correctAnswer) {
       return [
@@ -47,13 +43,11 @@ class Question extends Component {
         question,
         incorrect_answers: incorrectAnswers,
         correct_answer: correctAnswer,
-      },
-      time,
-      nextQuestion,
+      }
     } = this.props;
     return (
       <>
-        <Timer startValue={ time } />
+        <Timer />
         <section className="questions">
           <div className="question-container">
             <span data-testid="question-category" className="question-category">
@@ -66,7 +60,6 @@ class Question extends Component {
         </section>
         <Answers
           answers={ this.setAnswers(incorrectAnswers, correctAnswer) }
-          nextQuestion={ nextQuestion }
         />
       </>
     );
