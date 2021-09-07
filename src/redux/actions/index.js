@@ -7,11 +7,23 @@ import {
   START_CRONOMETER,
   STOP_CRONOMETER,
   BTN_NEXT,
+  REVEAL_ANSWERS,
+  SET_CHRONOMETER,
 } from './actionTypes';
 
 const BASE_URL = 'https://opentdb.com/api.php';
 const GET_TOKEN_URL = 'https://opentdb.com/api_token.php?command=request';
 const BASE_AMOUNT = 5;
+
+export const setChronometer = (chronometer) => ({
+  type: SET_CHRONOMETER,
+  chronometer,
+});
+
+export const revealAnswers = (reveal) => ({
+  type: REVEAL_ANSWERS,
+  reveal,
+});
 
 export const fetchQuestions = (data) => ({
   type: FETCH_QUESTIONS,

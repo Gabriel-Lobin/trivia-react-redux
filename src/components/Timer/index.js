@@ -1,24 +1,29 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateSeconds, stopCronometer } from '../../redux/actions/index';
+import { updateSeconds, stopCronometer, setChronometer } from '../../redux/actions/index';
 
 class Timer extends Component {
   startChronometer() {
     const INTERVAL = 1000;
-    this.chronometer = setInterval(() => {
-      const { updateSecond, time } = this.props;
-      if (time > 0) {
-        updateSecond();
-      } else {
-        clearInterval(this.chronometer);
-      }
-    }, INTERVAL);
+    const { setChronometerInstance } = this.props;
+
+    setChronometerInstance(
+      setInterval(() => {
+        const { updateSecond, time } = this.props;
+        if (time > 0) {
+          updateSecond();
+        } else {
+          clearInterval(this.chronometer);
+        }
+      }, INTERVAL),
+    );
   }
 
   cronometer() {
-    const { stopCronometerTime } = this.props;
-    clearInterval(this.chronometer);
+    const { stopCronometerTime, chronometer, setChronometerInstance } = this.props;
+    clearInterval(chronometer);
+    setChronometerInstance(null);
     stopCronometerTime();
     this.startChronometer();
   }
@@ -35,6 +40,8 @@ class Timer extends Component {
 }
 
 Timer.propTypes = {
+  chronometer: PropTypes.number.isRequired,
+  setChronometerInstance: PropTypes.func.isRequired,
   stopCronometerTime: PropTypes.func.isRequired,
   time: PropTypes.number.isRequired,
   timer: PropTypes.bool.isRequired,
@@ -44,11 +51,13 @@ Timer.propTypes = {
 const mapStateToProps = (state) => ({
   time: state.questions.time,
   timer: state.questions.timer,
+  chronometer: state.timer.chronometer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   updateSecond: () => dispatch(updateSeconds()),
   stopCronometerTime: () => dispatch(stopCronometer()),
+  setChronometerInstance: (chronometer) => dispatch(setChronometer(chronometer)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);

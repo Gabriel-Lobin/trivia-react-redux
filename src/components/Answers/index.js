@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { nextQuestions, startCronometer, btnNext } from '../../redux/actions';
+import {
+  nextQuestions,
+  startCronometer,
+  btnNext,
+  revealAnswers,
+} from '../../redux/actions';
+import Button from '../Button';
+
+import './style.css';
 
 class Answers extends Component {
   constructor(props) {
@@ -24,37 +32,36 @@ class Answers extends Component {
       currentQuestion,
       time,
       btnNextValue,
+      setRevealAnswers,
     } = this.props;
     const QUATRO = 4;
 
     return (
       <section className="answers">
         {answers.map((answer, index) => (
-          <button
-            disabled={ time === 0 }
-            data-testid={
-              answer.correct ? 'correct-answer' : `wrong-answer${index}`
-            }
+          <Button
             key={ index }
-            type="button"
-            onClick={ this.nextBtn }
-          >
-            {answer.value}
-          </button>
+            time={ time }
+            answer={ answer }
+            nextBtn={ this.nextBtn }
+          />
         ))}
-        { btnNextValue ? (
+        {btnNextValue ? (
           <button
             disabled={ currentQuestion === QUATRO }
             data-testid="btn-next"
             onClick={ () => {
               nextQuestion();
               startCronometerTime();
+              setRevealAnswers(false);
             } }
             type="button"
           >
             Próxima
-          </button>)
-          : false }
+          </button>
+        ) : (
+          false
+        )}
       </section>
     );
   }
@@ -66,6 +73,7 @@ Answers.propTypes = {
   btnNextValue: PropTypes.bool.isRequired,
   currentQuestion: PropTypes.number.isRequired,
   nextQuestion: PropTypes.func.isRequired,
+  setRevealAnswers: PropTypes.func.isRequired,
   startCronometerTime: PropTypes.func.isRequired,
   time: PropTypes.number.isRequired,
 };
@@ -80,6 +88,7 @@ const mapDispatchToProps = (dispatch) => ({
   nextQuestion: () => dispatch(nextQuestions()),
   startCronometerTime: () => dispatch(startCronometer()),
   btnNextReducer: () => dispatch(btnNext()),
+  setRevealAnswers: (reveal) => dispatch(revealAnswers(reveal)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Answers);

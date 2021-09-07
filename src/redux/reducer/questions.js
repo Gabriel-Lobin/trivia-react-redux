@@ -5,6 +5,7 @@ import {
   START_CRONOMETER,
   STOP_CRONOMETER,
   BTN_NEXT,
+  REVEAL_ANSWERS,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -13,10 +14,16 @@ const INITIAL_STATE = {
   time: 30,
   timer: true,
   btnNext: false,
+  reveal: false,
 };
 
 const questions = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+  case REVEAL_ANSWERS:
+    return {
+      ...state,
+      reveal: action.reveal,
+    };
   case FETCH_QUESTIONS:
     return {
       ...state,
