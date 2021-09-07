@@ -54,7 +54,7 @@ class Answers extends Component {
           >
             Próxima
           </button>)
-          : <p>``</p> }
+          : false }
       </section>
     );
   }
