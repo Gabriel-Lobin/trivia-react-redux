@@ -6,6 +6,7 @@ import {
   NEXT_QUESTION,
   START_CRONOMETER,
   STOP_CRONOMETER,
+  BTN_NEXT,
 } from './actionTypes';
 
 const BASE_URL = 'https://opentdb.com/api.php';
@@ -42,6 +43,10 @@ export const startCronometer = () => ({
 
 export const stopCronometer = () => ({
   type: STOP_CRONOMETER,
+});
+
+export const btnNext = () => ({
+  type: BTN_NEXT,
 });
 
 export const fetchQuestionsThunk = ({ amount = BASE_AMOUNT, token }) => (
