@@ -11,3 +11,5 @@ export const UPDATE_SECOND = 'UPDATE_SECOND';
 export const START_CRONOMETER = 'START_CRONOMETER';
 
 export const STOP_CRONOMETER = 'STOP_CRONOMETER';
+
+export const BTN_NEXT = 'BTN_NEXT';

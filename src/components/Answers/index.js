@@ -1,9 +1,21 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { nextQuestions, startCronometer } from '../../redux/actions';
+import { nextQuestions, startCronometer, btnNext } from '../../redux/actions';
 
 class Answers extends Component {
+  constructor(props) {
+    super(props);
+
+    this.nextBtn = this.nextBtn.bind(this);
+  }
+
+  nextBtn() {
+    const { btnNextReducer } = this.props;
+    btnNextReducer();
+    console.log('foi');
+  }
+
   render() {
     const {
       answers,
@@ -11,8 +23,10 @@ class Answers extends Component {
       startCronometerTime,
       currentQuestion,
       time,
+      btnNextValue,
     } = this.props;
     const QUATRO = 4;
+
     return (
       <section className="answers">
         {answers.map((answer, index) => (
@@ -23,20 +37,24 @@ class Answers extends Component {
             }
             key={ index }
             type="button"
+            onClick={ this.nextBtn }
           >
             {answer.value}
           </button>
         ))}
-        <button
-          disabled={ currentQuestion === QUATRO }
-          onClick={ () => {
-            nextQuestion();
-            startCronometerTime();
-          } }
-          type="button"
-        >
-          next
-        </button>
+        { btnNextValue ? (
+          <button
+            disabled={ currentQuestion === QUATRO }
+            data-testid="btn-next"
+            onClick={ () => {
+              nextQuestion();
+              startCronometerTime();
+            } }
+            type="button"
+          >
+            Próxima
+          </button>)
+          : false }
       </section>
     );
   }
@@ -44,6 +62,8 @@ class Answers extends Component {
 
 Answers.propTypes = {
   answers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  btnNextReducer: PropTypes.func.isRequired,
+  btnNextValue: PropTypes.bool.isRequired,
   currentQuestion: PropTypes.number.isRequired,
   nextQuestion: PropTypes.func.isRequired,
   startCronometerTime: PropTypes.func.isRequired,
@@ -53,11 +73,13 @@ Answers.propTypes = {
 const mapStateToProps = (state) => ({
   currentQuestion: state.questions.currentQuestion,
   time: state.questions.time,
+  btnNextValue: state.questions.btnNext,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   nextQuestion: () => dispatch(nextQuestions()),
   startCronometerTime: () => dispatch(startCronometer()),
+  btnNextReducer: () => dispatch(btnNext()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Answers);
