@@ -49,6 +49,7 @@ class Answers extends Component {
         {btnNextValue ? (
           <button
             data-testid="btn-next"
+            id="btn-next"
             onClick={ () => {
               nextQuestion();
               startCronometerTime();
