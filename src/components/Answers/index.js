@@ -8,6 +8,7 @@ import {
   revealAnswers,
 } from '../../redux/actions';
 import Button from '../Button';
+// abc
 
 import './style.css';
 
@@ -46,7 +47,7 @@ class Answers extends Component {
             nextBtn={ this.nextBtn }
           />
         ))}
-        {btnNextValue ? (
+        {btnNextValue || time === 0 ? (
           <button
             data-testid="btn-next"
             id="btn-next"
