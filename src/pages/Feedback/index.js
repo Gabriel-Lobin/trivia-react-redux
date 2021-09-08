@@ -8,15 +8,18 @@ const BASE_SCORE = 3;
 class Feedback extends React.Component {
   render() {
     const { questions, assertions } = this.props;
-    const feedbackText = assertions >= BASE_SCORE
-      ? 'Mandou bem!'
-      : 'Podia ser melhor...';
+    const feedbackText = assertions >= BASE_SCORE ? 'Mandou bem!' : 'Podia ser melhor...';
     return (
       <>
         <GameHeader />
         <main className="feedback">
-          <h1 data-testid="feedback-text">{ feedbackText }</h1>
-          <h2>{`Você acertou ${assertions} de ${questions.length}`}</h2>
+          <h1 data-testid="feedback-text">{feedbackText}</h1>
+          <h2 data-testid="feedback-total-score">
+            Você acertou
+            {' '}
+            <span data-testid="feedback-total-question">{assertions}</span>
+            {`de ${questions.length}`}
+          </h2>
         </main>
       </>
     );
