@@ -23,7 +23,7 @@ class Feedback extends React.Component {
             Você acertou
             {' '}
             <span data-testid="feedback-total-question">{assertions}</span>
-            {`de ${questions.length}`}
+            {` de ${questions.length}`}
           </h2>
         </main>
       </>
