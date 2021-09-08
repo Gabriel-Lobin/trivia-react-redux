@@ -1,0 +1,25 @@
+.answers {
+  display: flex;
+  flex-direction: column;
+}
+
+.answers button {
+  background: none;
+  border: 3px solid gray;
+  border-radius: 20px;
+  color: rgb(24, 24, 24);
+  font-size: 1.3rem;
+  padding: 0 10px;
+}
+
+.answers button:disabled {
+  filter: opacity(0.2);
+}
+
+.answers .correct-answer {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.answers .wrong-answer {
+  border: 3px solid red;
+}

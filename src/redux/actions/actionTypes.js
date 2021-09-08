@@ -13,3 +13,7 @@ export const START_CRONOMETER = 'START_CRONOMETER';
 export const STOP_CRONOMETER = 'STOP_CRONOMETER';
 
 export const BTN_NEXT = 'BTN_NEXT';
+
+export const REVEAL_ANSWERS = 'REVEAL_ANSWERS';
+
+export const SET_CHRONOMETER = 'SET_CHRONOMETER';

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class GameHeader extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.localStorageValidation = this.localStorageValidation.bind(this);
   }
