@@ -8,7 +8,6 @@ import {
   revealAnswers,
 } from '../../redux/actions';
 import Button from '../Button';
-import BtnRanking from '../btnRanking';
 
 import './style.css';
 
