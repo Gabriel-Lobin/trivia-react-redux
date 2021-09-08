@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchStartThunk, saveFormData } from '../redux/actions';
+import { fetchQuestionsThunk, fetchStartThunk, saveFormData } from '../../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -14,6 +14,15 @@ class Login extends React.Component {
     this.disabledButton = this.disabledButton.bind(this);
     this.startGame = this.startGame.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidUpdate() {
+    const { token, history, getQuestions } = this.props;
+    if (token) {
+      getQuestions({ token });
+      localStorage.setItem('token', token);
+      history.push('/game');
+    }
   }
 
   handleClick() {
@@ -37,11 +46,9 @@ class Login extends React.Component {
   }
 
   startGame() {
-    const { history, gameStart, saveData, token } = this.props;
+    const { gameStart, saveData } = this.props;
     saveData(this.state);
     gameStart();
-    localStorage.setItem('token', token);
-    history.push('/game');
   }
 
   render() {
@@ -92,8 +99,13 @@ class Login extends React.Component {
   }
 }
 
+Login.defaultProptype = {
+  login: '',
+};
+
 Login.propTypes = {
   gameStart: PropTypes.func.isRequired,
+  getQuestions: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
@@ -102,6 +114,7 @@ Login.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  getQuestions: ({ token }) => dispatch(fetchQuestionsThunk({ token })),
   saveData: (state) => dispatch(saveFormData(state)),
   gameStart: () => dispatch(fetchStartThunk()),
 });
