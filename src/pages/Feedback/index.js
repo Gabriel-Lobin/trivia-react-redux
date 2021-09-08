@@ -6,6 +6,17 @@ import GameHeader from '../../components/GameHeader';
 const BASE_SCORE = 3;
 
 class Feedback extends React.Component {
+  constructor() {
+    super();
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const { history } = this.props;
+    history.push('/');
+  }
+
   render() {
     const { questions, assertions, score } = this.props;
     const feedbackText = assertions >= BASE_SCORE ? 'Mandou bem!' : 'Podia ser melhor...';
@@ -25,6 +36,13 @@ class Feedback extends React.Component {
             <span data-testid="feedback-total-question">{assertions}</span>
             {` de ${questions.length}`}
           </h2>
+          <button
+            type="button"
+            data-testid="btn-play-again"
+            onClick={ this.handleClick }
+          >
+            Jogar novamente
+          </button>
         </main>
       </>
     );
@@ -33,6 +51,9 @@ class Feedback extends React.Component {
 
 Feedback.propTypes = {
   assertions: PropTypes.number.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
   questions: PropTypes.shape({
     length: PropTypes.number.isRequired,
   }).isRequired,
