@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import GameHeader from '../../components/GameHeader';
+import GameHeader from '../../components/GameHeader/index';
 import Question from '../../components/Question';
 
 import './style.css';
