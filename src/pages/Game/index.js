@@ -7,9 +7,20 @@ import Question from '../../components/Question';
 import './style.css';
 
 class Game extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.goToFeedback = this.goToFeedback.bind(this);
+  }
+
   componentDidMount() {
     const { player } = this.props;
     localStorage.setItem('state', JSON.stringify({ player }));
+  }
+
+  goToFeedback() {
+    const { history } = this.props;
+    history.push('/feedback');
   }
 
   renderQuestion() {
@@ -26,6 +37,7 @@ class Game extends React.Component {
         <main className="game-screen">
           {this.renderQuestion() ? (
             <Question
+              goToFeedback={ this.goToFeedback }
               nextQuestion={ this.nextQuestion }
               data={ questions[currentQuestion] }
             />
@@ -40,7 +52,10 @@ class Game extends React.Component {
 
 Game.propTypes = {
   currentQuestion: PropTypes.number.isRequired,
-  player: PropTypes.objectOf(PropTypes).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+  player: PropTypes.objectOf().isRequired,
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
