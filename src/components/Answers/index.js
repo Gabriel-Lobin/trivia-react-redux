@@ -32,6 +32,7 @@ class Answers extends Component {
       time,
       btnNextValue,
       setRevealAnswers,
+      goToFeedback,
     } = this.props;
     const QUATRO = 4;
 
@@ -47,13 +48,13 @@ class Answers extends Component {
         ))}
         {btnNextValue ? (
           <button
-            disabled={ currentQuestion === QUATRO }
             data-testid="btn-next"
             id="btn-next"
             onClick={ () => {
               nextQuestion();
               startCronometerTime();
               setRevealAnswers(false);
+              if (currentQuestion === QUATRO) goToFeedback();
             } }
             type="button"
           >
@@ -72,6 +73,7 @@ Answers.propTypes = {
   btnNextReducer: PropTypes.func.isRequired,
   btnNextValue: PropTypes.bool.isRequired,
   currentQuestion: PropTypes.number.isRequired,
+  goToFeedback: PropTypes.func.isRequired,
   nextQuestion: PropTypes.func.isRequired,
   setRevealAnswers: PropTypes.func.isRequired,
   startCronometerTime: PropTypes.func.isRequired,

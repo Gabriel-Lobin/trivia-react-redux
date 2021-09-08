@@ -17,3 +17,7 @@ export const BTN_NEXT = 'BTN_NEXT';
 export const REVEAL_ANSWERS = 'REVEAL_ANSWERS';
 
 export const SET_CHRONOMETER = 'SET_CHRONOMETER';
+
+export const SET_SCORE = 'SET_SCORE';
+
+export const SET_ASSERTION = 'SET_ASSERTION';
