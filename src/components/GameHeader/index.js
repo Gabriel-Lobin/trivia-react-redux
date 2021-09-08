@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import BtnRanking from '../btnRanking';
 
 class GameHeader extends Component {
   constructor(props) {
@@ -29,6 +31,9 @@ class GameHeader extends Component {
         />
         <h2 data-testid="header-player-name">{nome}</h2>
         <h2 data-testid="header-score">0</h2>
+        <Link to="/ranking">
+          <BtnRanking />
+        </Link>
       </header>
     );
   }

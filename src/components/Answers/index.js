@@ -8,6 +8,7 @@ import {
   revealAnswers,
 } from '../../redux/actions';
 import Button from '../Button';
+import BtnRanking from '../btnRanking';
 
 import './style.css';
 
@@ -21,7 +22,6 @@ class Answers extends Component {
   nextBtn() {
     const { btnNextReducer } = this.props;
     btnNextReducer();
-    console.log('foi');
   }
 
   render() {
@@ -50,6 +50,7 @@ class Answers extends Component {
           <button
             disabled={ currentQuestion === QUATRO }
             data-testid="btn-next"
+            id="btn-next"
             onClick={ () => {
               nextQuestion();
               startCronometerTime();
