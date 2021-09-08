@@ -120,7 +120,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  token: state.player.token,
+  token: state.login.token,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

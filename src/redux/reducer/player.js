@@ -1,22 +1,31 @@
-import { FETCH_SUCCESS, SAVE_DATA } from '../actions/actionTypes';
+import {
+  SAVE_DATA, SET_ASSERTION, SET_SCORE,
+} from '../actions/actionTypes';
 
 const INITIAL_STATE = {
-  nome: '',
-  email: '',
+  name: '',
+  assertions: 0,
+  score: 0,
+  gravatarEmail: '',
 };
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case FETCH_SUCCESS:
-    return {
-      ...state,
-      token: action.token,
-    };
   case SAVE_DATA:
     return {
       ...state,
-      nome: action.nameLogin,
-      email: action.emailLogin,
+      name: action.nameLogin,
+      gravatarEmail: action.emailLogin,
+    };
+  case SET_SCORE:
+    return {
+      ...state,
+      score: state.score + action.score,
+    };
+  case SET_ASSERTION:
+    return {
+      ...state,
+      assertions: state.assertions + 1,
     };
   default:
     return state;
