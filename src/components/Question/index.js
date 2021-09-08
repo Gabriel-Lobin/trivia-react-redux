@@ -33,6 +33,7 @@ class Question extends Component {
         incorrect_answers: incorrectAnswers,
         correct_answer: correctAnswer,
       },
+      goToFeedback,
     } = this.props;
     return (
       <>
@@ -48,6 +49,7 @@ class Question extends Component {
           </div>
         </section>
         <Answers
+          goToFeedback={ goToFeedback }
           answers={ this.setAnswers(incorrectAnswers, correctAnswer) }
         />
       </>
@@ -62,6 +64,7 @@ Question.propTypes = {
     incorrect_answers: PropTypes.arrayOf(PropTypes.string),
     correct_answer: PropTypes.string,
   }).isRequired,
+  goToFeedback: PropTypes.func.isRequired,
 };
 
 export default Question;

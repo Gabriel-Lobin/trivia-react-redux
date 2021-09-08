@@ -72,7 +72,7 @@ class Button extends React.Component {
     return (
       <button
         className={ this.setClassName(reveal, answer) }
-        disabled={ time === 0 }
+        disabled={ time === 0 || reveal }
         data-testid={
           answer.correct ? 'correct-answer' : `wrong-answer${key}`
         }
