@@ -46,7 +46,7 @@ class Answers extends Component {
             nextBtn={ this.nextBtn }
           />
         ))}
-        {btnNextValue ? (
+        {btnNextValue || time === 0 ? (
           <button
             data-testid="btn-next"
             id="btn-next"
