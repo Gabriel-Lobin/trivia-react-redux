@@ -21,7 +21,6 @@ class Answers extends Component {
   nextBtn() {
     const { btnNextReducer } = this.props;
     btnNextReducer();
-    console.log('foi');
   }
 
   render() {

@@ -7,6 +7,11 @@ import Question from '../../components/Question';
 import './style.css';
 
 class Game extends React.Component {
+  componentDidMount() {
+    const { player } = this.props;
+    localStorage.setItem('state', JSON.stringify({ player }));
+  }
+
   renderQuestion() {
     const { questions } = this.props;
     return !!questions.length;
@@ -35,10 +40,12 @@ class Game extends React.Component {
 
 Game.propTypes = {
   currentQuestion: PropTypes.number.isRequired,
+  player: PropTypes.objectOf(PropTypes).isRequired,
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  player: state.player,
   questions: state.questions.data,
   currentQuestion: state.questions.currentQuestion,
 });

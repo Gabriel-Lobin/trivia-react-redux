@@ -25,17 +25,6 @@ class Question extends Component {
     return [];
   }
 
-  // category: 'General Knowledge',
-  // type: 'multiple',
-  // difficulty: 'hard',
-  // question: 'De Eemhof, Port Zelande and Het Heijderbos are holiday villas owned by what company?',
-  // correct_answer: 'Center Parcs',
-  // incorrect_answers: [
-  //   'Yelloh Village',
-  //   'Keycamp',
-  //   'Villa Plus'
-  // ]
-
   render() {
     const {
       data: {

@@ -9,6 +9,8 @@ import {
   BTN_NEXT,
   REVEAL_ANSWERS,
   SET_CHRONOMETER,
+  SET_SCORE,
+  SET_ASSERTION,
 } from './actionTypes';
 
 const BASE_URL = 'https://opentdb.com/api.php';
@@ -18,6 +20,15 @@ const BASE_AMOUNT = 5;
 export const setChronometer = (chronometer) => ({
   type: SET_CHRONOMETER,
   chronometer,
+});
+
+export const setAssertions = () => ({
+  type: SET_ASSERTION,
+});
+
+export const setScore = (score) => ({
+  type: SET_SCORE,
+  score,
 });
 
 export const revealAnswers = (reveal) => ({
@@ -65,7 +76,6 @@ export const fetchQuestionsThunk = ({ amount = BASE_AMOUNT, token }) => (
   async (dispatch) => {
     const buffer = await fetch(`${BASE_URL}?amount=${amount}&token=${token}`);
     const response = await buffer.json();
-    console.log(token, response);
     dispatch(fetchQuestions(response.results));
   }
 );
