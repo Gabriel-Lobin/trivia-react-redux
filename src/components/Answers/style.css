@@ -1,16 +1,18 @@
 .answers {
   display: flex;
-  flex-direction: column;
 }
 
 .answers button {
-  background: none;
-  border: 3px solid gray;
-  border-radius: 20px;
-  color: rgb(24, 24, 24);
+  background: rgb(4, 33, 89);
+  border: 3px solid rgb(4, 33, 89);
+  border-radius: 40px;
+  box-shadow: 0 0 8px 4px rgba(4, 33, 89, 0.329);
+  color: whitesmoke;
   cursor: crosshair;
   font-size: 1.3rem;
-  padding: 0 10px;
+  margin: 0 10px;
+  padding: 10px 20px;
+  transition: all 200ms;
 }
 
 .answers button:disabled {
@@ -19,8 +21,20 @@
 
 .answers .correct-answer {
   border: 3px solid rgb(6, 240, 15);
+  background: rgba(6, 240, 15, .5);
+  box-shadow: 0 0 8px 4px rgba(6, 240, 15, 0.329);
+
 }
 
 .answers .wrong-answer {
   border: 3px solid red;
+  background: rgba(255, 0, 0, 0.5);
+  box-shadow: 0 0 8px 4px rgba(255, 0, 0, 0.329);
+
+}
+
+.next-btn {
+  position: absolute;
+  bottom: 20%;
+
 }

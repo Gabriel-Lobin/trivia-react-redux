@@ -1,0 +1,25 @@
+.questions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 15px;
+
+}
+
+.question-container {
+  margin-top: 160px;
+}
+
+.question-container .question-category {
+  font-size: 1.8rem;
+  position: absolute;
+  right: 25px;
+  top: 10%;
+}
+
+.question-container .question-text {
+  color: whitesmoke;
+  font-size: 1.8rem;
+  margin-bottom: 80px;
+  text-align: center;
+}

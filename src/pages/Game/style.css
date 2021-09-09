@@ -1,6 +1,11 @@
 .game-screen {
-  align-items: center;
+  color: rgb(242, 228, 33);
   display: flex;
-  height: 100vh;
+  height: 85%;
   justify-content: center;
+  position: relative;
+}
+
+.game-screen h1 {
+  margin-top: 20%;
 }
