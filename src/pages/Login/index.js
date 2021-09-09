@@ -9,6 +9,7 @@ class Login extends React.Component {
     this.state = {
       nameLogin: '',
       emailLogin: '',
+      img: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.disabledButton = this.disabledButton.bind(this);
@@ -45,8 +46,19 @@ class Login extends React.Component {
     return true;
   }
 
-  startGame() {
+  async startGame() {
     const { gameStart, saveData } = this.props;
+    const localStorageToken = localStorage.getItem('token');
+    const imgPerson = localStorageToken !== 'null'
+      ? `https://www.gravatar.com/avatar/${localStorageToken}`
+      : 'https://media0.giphy.com/media/3oEjI6SIIHBdRxXI40/200.gif';
+
+    await this.setState({
+      img: imgPerson,
+    });
+
+    console.log(this.state);
+
     saveData(this.state);
     gameStart();
   }
