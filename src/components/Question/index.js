@@ -43,8 +43,7 @@ Question.propTypes = {
   data: PropTypes.shape({
     category: PropTypes.string,
     question: PropTypes.string,
-    incorrect_answers: PropTypes.arrayOf(PropTypes.string),
-    correct_answer: PropTypes.string,
+    answers: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   goToFeedback: PropTypes.func.isRequired,
 };
