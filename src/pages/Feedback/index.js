@@ -12,6 +12,31 @@ class Feedback extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidMount() {
+    const { name, score } = this.props;
+    const imgPerson = this.fetchImg();
+
+    const person = {
+      name,
+      score,
+      picture: imgPerson,
+    };
+
+    const json = localStorage.getItem('ranking');
+    const currentStorage = JSON.parse(json);
+
+    const newStorage = [...currentStorage, person];
+
+    localStorage.setItem('ranking', JSON.stringify(newStorage));
+  }
+
+  fetchImg() {
+    const localStorageToken = localStorage.getItem('token');
+    if (localStorageToken !== 'null') {
+      return `https://www.gravatar.com/avatar/${localStorageToken}`;
+    }
+  }
+
   handleClick() {
     const { history } = this.props;
     history.push('/');
@@ -52,8 +77,9 @@ class Feedback extends React.Component {
 Feedback.propTypes = {
   assertions: PropTypes.number.isRequired,
   history: PropTypes.shape({
-    push: PropTypes.func,
+    push: PropTypes.func.isRequired,
   }).isRequired,
+  name: PropTypes.string.isRequired,
   questions: PropTypes.shape({
     length: PropTypes.number.isRequired,
   }).isRequired,
@@ -64,6 +90,7 @@ const mapStateToProps = (state) => ({
   score: state.player.score,
   assertions: state.player.assertions,
   questions: state.questions.data,
+  name: state.player.name,
 });
 
 export default connect(mapStateToProps, null)(Feedback);

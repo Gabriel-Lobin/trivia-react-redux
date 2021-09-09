@@ -17,6 +17,10 @@ class Login extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidMount() {
+    localStorage.setItem('ranking', JSON.stringify([]));
+  }
+
   componentDidUpdate() {
     const { token, history, getQuestions } = this.props;
     if (token) {
