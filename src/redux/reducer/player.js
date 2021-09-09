@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   assertions: 0,
   score: 0,
   gravatarEmail: '',
+  img: '',
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -16,6 +17,7 @@ const player = (state = INITIAL_STATE, action) => {
       ...state,
       name: action.nameLogin,
       gravatarEmail: action.emailLogin,
+      img: action.img,
     };
   case SET_SCORE:
     return {
