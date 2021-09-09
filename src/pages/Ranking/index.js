@@ -9,6 +9,7 @@ export default class Ranking extends Component {
 
     return (
       <>
+        <h1 data-testid="ranking-title">Ranking</h1>
         <img src={ img } alt="Icone do jogador" />
         <h3 data-testid={ `player-name-${0}` }>{`Nome: ${name}`}</h3>
         <h3 data-testid={ `player-score-${0}` }>{`${score} pontos`}</h3>
