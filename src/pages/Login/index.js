@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { FiSettings } from 'react-icons/fi';
 import { fetchQuestionsThunk, fetchStartThunk, saveFormData } from '../../redux/actions';
+import './style.css';
 
 class Login extends React.Component {
   constructor() {
@@ -66,31 +68,28 @@ class Login extends React.Component {
   render() {
     const { nameLogin, emailLogin } = this.state;
     return (
-      <div>
-        <form action="">
-          <label htmlFor="nome-login">
-            Nome:
-            <input
-              value={ nameLogin }
-              data-testid="input-player-name"
-              type="text"
-              name="nameLogin"
-              id="nome-login"
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="email-login">
-            Email:
-            <input
-              value={ emailLogin }
-              data-testid="input-gravatar-email"
-              type="email"
-              name="emailLogin"
-              id="email-login"
-              onChange={ this.handleChange }
-            />
-          </label>
+      <main className="login-screen">
+        <form>
+          <input
+            placeholder="Nome"
+            value={ nameLogin }
+            data-testid="input-player-name"
+            type="text"
+            name="nameLogin"
+            id="nome-login"
+            onChange={ this.handleChange }
+          />
+          <input
+            placeholder="Email"
+            value={ emailLogin }
+            data-testid="input-gravatar-email"
+            type="email"
+            name="emailLogin"
+            id="email-login"
+            onChange={ this.handleChange }
+          />
           <button
+            className="play-btn"
             disabled={ this.disabledButton() }
             data-testid="btn-play"
             type="button"
@@ -99,14 +98,15 @@ class Login extends React.Component {
             Jogar
           </button>
           <button
+            className="settings-btn"
             type="button"
             data-testid="btn-settings"
             onClick={ this.handleClick }
           >
-            Configurações
+            <FiSettings />
           </button>
         </form>
-      </div>
+      </main>
     );
   }
 }
