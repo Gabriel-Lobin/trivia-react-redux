@@ -35,6 +35,13 @@ class Question extends Component {
       },
       goToFeedback,
     } = this.props;
+    // código para decode do HTML text que a api retorna.
+    //  https://stackoverflow.com/questions/42361689/implement-html-entity-decode-in-react-js
+    const renderHTML = (
+      escapedHTML,
+    ) => React.createElement('div', {
+      dangerouslySetInnerHTML: { __html: escapedHTML },
+    });
     return (
       <>
         <Timer />
@@ -44,7 +51,7 @@ class Question extends Component {
               {category}
             </span>
             <p data-testid="question-text" className="question-text">
-              {question}
+              {renderHTML(question)}
             </p>
           </div>
         </section>
