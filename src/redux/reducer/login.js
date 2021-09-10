@@ -15,7 +15,7 @@ const login = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       token: '',
-    }
+    };
   default:
     return state;
   }

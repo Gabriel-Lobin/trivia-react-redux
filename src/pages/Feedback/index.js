@@ -22,10 +22,10 @@ class Feedback extends React.Component {
       picture: imgPerson,
     };
 
-    const json = localStorage.getItem('ranking');
-    const currentStorage = JSON.parse(json);
+    const rankingJson = localStorage.getItem('ranking');
+    const ranking = JSON.parse(rankingJson);
 
-    const newStorage = [...currentStorage, person];
+    const newStorage = [...ranking, person];
 
     localStorage.setItem('ranking', JSON.stringify(newStorage));
   }

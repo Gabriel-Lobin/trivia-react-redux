@@ -23,12 +23,12 @@ class Login extends React.Component {
     this.startGame = this.startGame.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.resetSetState = this.resetSetState.bind(this);
-    this.resetLocalStorage = this.resetLocalStorage.bind(this);
+    // this.resetLocalStorage = this.resetLocalStorage.bind(this);
     this.resetStateGlobal = this.resetStateGlobal.bind(this);
   }
 
   componentDidMount() {
-    this.resetLocalStorage();
+    // this.resetLocalStorage();
     this.resetSetState();
     this.resetStateGlobal();
   }
@@ -42,16 +42,18 @@ class Login extends React.Component {
     }
   }
 
-  async resetLocalStorage() {
-    const json = localStorage.getItem('ranking');
-    const currentStorage = JSON.parse(json);
+  // resetLocalStorage() {
+  //   const json = localStorage.getItem('ranking');
+  //   const currentStorage = JSON.parse(json);
 
-    if (currentStorage === null) {
-      localStorage.setItem('ranking', JSON.stringify([]));
-    }
-    await localStorage.setItem('token', 'token');
-    await localStorage.setItem('state', 'state');
-  }
+  //   console.log(currentStorage);
+
+  //   if (currentStorage === null) {
+  //     localStorage.setItem('ranking', JSON.stringify([]));
+  //   }
+  //   localStorage.setItem('token', 'token');
+  //   localStorage.setItem('state', 'state');
+  // }
 
   resetSetState() {
     this.setState({

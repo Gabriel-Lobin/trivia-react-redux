@@ -8,7 +8,7 @@ export default class PlayerRank extends Component {
     return (
       <li>
         <img src={ picture } alt="Icone do jogador" />
-        <h3 data-testid={ `player-name-${index}` }>{`Nome: ${name}`}</h3>
+        <h3 data-testid={ `player-name-${index}` }>{name}</h3>
         <h3 data-testid={ `player-score-${index}` }>{`${score} pontos`}</h3>
       </li>
     );

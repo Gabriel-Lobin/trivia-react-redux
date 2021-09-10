@@ -22,6 +22,14 @@ export const SET_SCORE = 'SET_SCORE';
 
 export const SET_ASSERTION = 'SET_ASSERTION';
 
+export const RESET_TIME = 'RESET_TIME';
+
+export const RESET_TIMER = 'RESET_TIMER';
+
 export const RESET_STATE_LOGIN = 'RESET_STATE_LOGIN';
+
 export const RESET_STATE_PLAYER = 'RESET_STATE_PLAYER';
+
 export const RESET_STATE_QUESTIONS = 'RESET_STATE_QUESTIONS';
+
+export const HIDDEN_NEXT_BUTTON = 'HIDDEN_NEXT_BUTTON';

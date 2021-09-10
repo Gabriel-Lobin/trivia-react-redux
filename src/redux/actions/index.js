@@ -14,7 +14,8 @@ import {
   RESET_STATE_LOGIN,
   RESET_STATE_QUESTIONS,
   RESET_STATE_PLAYER,
-  RESET_STATE_TIMER,
+  RESET_TIME,
+  HIDDEN_NEXT_BUTTON,
 } from './actionTypes';
 
 const BASE_URL = 'https://opentdb.com/api.php';
@@ -76,6 +77,10 @@ export const btnNext = () => ({
   type: BTN_NEXT,
 });
 
+export const hiddenButton = () => ({
+  type: HIDDEN_NEXT_BUTTON,
+});
+
 export const resetStateLogin = () => ({
   type: RESET_STATE_LOGIN,
 });
@@ -88,6 +93,10 @@ export const resetStateQuestions = () => ({
   type: RESET_STATE_QUESTIONS,
 });
 
+export const resetTime = () => ({
+  type: RESET_TIME,
+});
+
 export const fetchQuestionsThunk = ({ amount = BASE_AMOUNT, token }) => (
   async (dispatch) => {
     const buffer = await fetch(`${BASE_URL}?amount=${amount}&token=${token}`);
@@ -95,9 +104,22 @@ export const fetchQuestionsThunk = ({ amount = BASE_AMOUNT, token }) => (
     dispatch(fetchQuestions(response.results));
   }
 );
+
 export const fetchStartThunk = () => async (dispatch) => {
   const response = await fetch(GET_TOKEN_URL);
   const { token } = await response.json();
   localStorage.setItem('token', token);
+
+  const json = localStorage.getItem('ranking');
+  const currentStorage = JSON.parse(json);
+
+  console.log(currentStorage);
+
+  if (currentStorage === null) {
+    localStorage.setItem('ranking', JSON.stringify([]));
+  }
+  localStorage.setItem('token', 'token');
+  localStorage.setItem('state', 'state');
+
   dispatch(fetchSuccess(token));
 };

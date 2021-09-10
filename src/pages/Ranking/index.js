@@ -11,7 +11,7 @@ export default class Ranking extends Component {
 
     return (
       <>
-        <ul data-testid="player-name">
+        <ul>
           {
             players.length > 0 || players === null
               ? players.map((player, index) => (
