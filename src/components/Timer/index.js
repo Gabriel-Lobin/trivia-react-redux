@@ -51,8 +51,8 @@ Timer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  time: state.questions.time,
-  timer: state.questions.timer,
+  time: state.timer.time,
+  timer: state.timer.timer,
   chronometer: state.timer.chronometer,
 });
 

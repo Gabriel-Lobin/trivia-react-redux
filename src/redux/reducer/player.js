@@ -1,5 +1,5 @@
 import {
-  SAVE_DATA, SET_ASSERTION, SET_SCORE,
+  SAVE_DATA, SET_ASSERTION, SET_SCORE, RESET_STATE_PLAYER,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -28,6 +28,15 @@ const player = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       assertions: state.assertions + 1,
+    };
+  case RESET_STATE_PLAYER:
+    return {
+      ...state,
+      name: '',
+      assertions: 0,
+      score: 0,
+      gravatarEmail: '',
+      img: '',
     };
   default:
     return state;

@@ -1,4 +1,4 @@
-import { FETCH_SUCCESS } from '../actions/actionTypes';
+import { FETCH_SUCCESS, RESET_STATE_LOGIN } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   token: '',
@@ -10,6 +10,11 @@ const login = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       token: action.token,
+    };
+  case RESET_STATE_LOGIN:
+    return {
+      ...state,
+      token: '',
     };
   default:
     return state;

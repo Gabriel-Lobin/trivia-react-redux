@@ -6,6 +6,8 @@ import {
   startCronometer,
   btnNext,
   revealAnswers,
+  hiddenButton,
+  resetTime,
 } from '../../redux/actions';
 import Button from '../Button';
 
@@ -33,9 +35,10 @@ class Answers extends Component {
       btnNextValue,
       setRevealAnswers,
       goToFeedback,
+      hiddenButtonReducer,
+      resetTimeReducer,
     } = this.props;
     const QUATRO = 4;
-
     return (
       <>
         <section className="answers">
@@ -55,7 +58,9 @@ class Answers extends Component {
             id="btn-next"
             onClick={ () => {
               nextQuestion();
+              resetTimeReducer();
               startCronometerTime();
+              hiddenButtonReducer();
               setRevealAnswers(false);
               if (currentQuestion === QUATRO) goToFeedback();
             } }
@@ -78,7 +83,9 @@ Answers.propTypes = {
   btnNextValue: PropTypes.bool.isRequired,
   currentQuestion: PropTypes.number.isRequired,
   goToFeedback: PropTypes.func.isRequired,
+  hiddenButtonReducer: PropTypes.func.isRequired,
   nextQuestion: PropTypes.func.isRequired,
+  resetTimeReducer: PropTypes.func.isRequired,
   setRevealAnswers: PropTypes.func.isRequired,
   startCronometerTime: PropTypes.func.isRequired,
   time: PropTypes.number.isRequired,
@@ -95,6 +102,8 @@ const mapDispatchToProps = (dispatch) => ({
   startCronometerTime: () => dispatch(startCronometer()),
   btnNextReducer: () => dispatch(btnNext()),
   setRevealAnswers: (reveal) => dispatch(revealAnswers(reveal)),
+  hiddenButtonReducer: () => dispatch(hiddenButton()),
+  resetTimeReducer: () => dispatch(resetTime()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Answers);

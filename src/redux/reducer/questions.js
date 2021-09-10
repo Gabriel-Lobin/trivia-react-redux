@@ -1,18 +1,15 @@
 import {
   FETCH_QUESTIONS,
   NEXT_QUESTION,
-  UPDATE_SECOND,
-  START_CRONOMETER,
-  STOP_CRONOMETER,
+  HIDDEN_NEXT_BUTTON,
   BTN_NEXT,
   REVEAL_ANSWERS,
+  RESET_STATE_QUESTIONS,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   data: [],
   currentQuestion: 0,
-  time: 30,
-  timer: true,
   btnNext: false,
   reveal: false,
 };
@@ -29,33 +26,28 @@ const questions = (state = INITIAL_STATE, action) => {
       ...state,
       data: action.data,
     };
-  case UPDATE_SECOND:
-    return {
-      ...state,
-      time: state.time - 1,
-    };
   case NEXT_QUESTION:
     return {
       ...state,
       currentQuestion: state.currentQuestion + 1,
-      time: 30,
       btnNext: false,
     };
-  case START_CRONOMETER:
+  case HIDDEN_NEXT_BUTTON:
     return {
       ...state,
-      timer: true,
       btnNext: false,
-    };
-  case STOP_CRONOMETER:
-    return {
-      ...state,
-      timer: false,
     };
   case BTN_NEXT:
     return {
+      ...state, btnNext: true,
+    };
+  case RESET_STATE_QUESTIONS:
+    return {
       ...state,
-      btnNext: true,
+      data: [],
+      currentQuestion: 0,
+      btnNext: false,
+      reveal: false,
     };
   default:
     return state;

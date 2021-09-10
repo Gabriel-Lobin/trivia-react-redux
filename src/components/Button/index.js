@@ -119,7 +119,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   player: state.player,
-  time: state.questions.time,
+  time: state.timer.time,
   questions: state.questions.data,
   currentQuestion: state.questions.currentQuestion,
   reveal: state.questions.reveal,
