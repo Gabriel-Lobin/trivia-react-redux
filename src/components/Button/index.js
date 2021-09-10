@@ -37,7 +37,8 @@ class Button extends React.Component {
   }
 
   setClassName(reveal, answer) {
-    if (reveal) return answer.correct ? 'correct-answer' : 'wrong-answer';
+    const { time } = this.props;
+    if (reveal || time === 0) return answer.correct ? 'correct-answer' : 'wrong-answer';
     return '';
   }
 

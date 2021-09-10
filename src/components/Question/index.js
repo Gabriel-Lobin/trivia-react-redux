@@ -4,6 +4,8 @@ import Answers from '../Answers';
 import Timer from '../Timer';
 import fixEncodedWords from '../../utils/fixEncodedWords';
 
+import './style.css';
+
 const DEFAULT_ANSWERS = [];
 
 class Question extends Component {
@@ -18,23 +20,21 @@ class Question extends Component {
     } = this.props;
 
     return (
-      <>
+      <section className="questions">
         <Timer />
-        <section className="questions">
-          <div className="question-container">
-            <span data-testid="question-category" className="question-category">
-              {category}
-            </span>
-            <p data-testid="question-text" className="question-text">
-              {fixEncodedWords(question)}
-            </p>
-          </div>
-        </section>
+        <div className="question-container">
+          <span data-testid="question-category" className="question-category">
+            {category}
+          </span>
+          <p data-testid="question-text" className="question-text">
+            {fixEncodedWords(question)}
+          </p>
+        </div>
         <Answers
           goToFeedback={ goToFeedback }
           answers={ answers || DEFAULT_ANSWERS }
         />
-      </>
+      </section>
     );
   }
 }

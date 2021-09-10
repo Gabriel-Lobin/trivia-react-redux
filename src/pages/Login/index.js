@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FiSettings } from 'react-icons/fi';
+import { FcEngineering } from 'react-icons/fc';
 import { fetchQuestionsThunk, fetchStartThunk, saveFormData } from '../../redux/actions';
 import './style.css';
 
@@ -89,7 +89,7 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
           <button
-            className="play-btn"
+            className="special-btn"
             disabled={ this.disabledButton() }
             data-testid="btn-play"
             type="button"
@@ -103,7 +103,7 @@ class Login extends React.Component {
             data-testid="btn-settings"
             onClick={ this.handleClick }
           >
-            <FiSettings />
+            <FcEngineering />
           </button>
         </form>
       </main>
