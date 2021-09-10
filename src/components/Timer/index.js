@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateSeconds, stopCronometer, setChronometer } from '../../redux/actions/index';
 
+import './style.css';
+
 class Timer extends Component {
   startChronometer() {
     const INTERVAL = 1000;

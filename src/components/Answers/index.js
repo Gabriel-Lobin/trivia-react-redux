@@ -39,19 +39,21 @@ class Answers extends Component {
       resetTimeReducer,
     } = this.props;
     const QUATRO = 4;
-
     return (
-      <section className="answers">
-        {answers.map((answer, index) => (
-          <Button
-            key={ index }
-            time={ time }
-            answer={ answer }
-            nextBtn={ this.nextBtn }
-          />
-        ))}
+      <>
+        <section className="answers">
+          {answers.map((answer, index) => (
+            <Button
+              key={ index }
+              time={ time }
+              answer={ answer }
+              nextBtn={ this.nextBtn }
+            />
+          ))}
+        </section>
         {btnNextValue || time === 0 ? (
           <button
+            className="special-btn next-btn"
             data-testid="btn-next"
             id="btn-next"
             onClick={ () => {
@@ -69,7 +71,8 @@ class Answers extends Component {
         ) : (
           false
         )}
-      </section>
+      </>
+
     );
   }
 }

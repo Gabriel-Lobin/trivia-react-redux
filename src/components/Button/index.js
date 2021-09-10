@@ -7,6 +7,7 @@ import {
   setChronometer,
   setScore,
 } from '../../redux/actions';
+import fixEncodedWords from '../../utils/fixEncodedWords';
 
 const BASE_SCORE = 10;
 
@@ -36,7 +37,8 @@ class Button extends React.Component {
   }
 
   setClassName(reveal, answer) {
-    if (reveal) return answer.correct ? 'correct-answer' : 'wrong-answer';
+    const { time } = this.props;
+    if (reveal || time === 0) return answer.correct ? 'correct-answer' : 'wrong-answer';
     return '';
   }
 
@@ -79,7 +81,7 @@ class Button extends React.Component {
         type="button"
         onClick={ this.handleClick }
       >
-        {answer.value}
+        { fixEncodedWords(answer.value, 'span') }
       </button>
     );
   }

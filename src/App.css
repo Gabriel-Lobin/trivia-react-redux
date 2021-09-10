@@ -6,5 +6,31 @@
 }
 
 body {
+  background-color: rgb(2, 1, 38);
   height: 100vh;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.08);
+}
+
+
+.special-btn {
+  background-color: rgb(242, 56, 39);
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 0 8px 4px rgba(242, 56, 39, 0.329);
+  color: whitesmoke;
+  font-size: 2rem;
+  margin-top: 10px;
+  padding: 5px 15px;
+  transition: all 300ms;
+}
+
+.special-btn:hover {
+  box-shadow: 0 0 8px 8px rgba(242, 56, 39, 0.329);
 }

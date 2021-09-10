@@ -1,3 +1,4 @@
+import generateAnswersArray from '../../utils/generateAnswersArray';
 import {
   FETCH_QUESTIONS,
   FETCH_SUCCESS,
@@ -100,8 +101,24 @@ export const resetTime = () => ({
 export const fetchQuestionsThunk = ({ amount = BASE_AMOUNT, token }) => (
   async (dispatch) => {
     const buffer = await fetch(`${BASE_URL}?amount=${amount}&token=${token}`);
-    const response = await buffer.json();
-    dispatch(fetchQuestions(response.results));
+    const { results } = await buffer.json();
+
+    const questions = results.map((questionFromReq) => {
+      const question = {
+        ...questionFromReq,
+        answers: generateAnswersArray(
+          questionFromReq.incorrect_answers,
+          questionFromReq.correct_answer,
+        ),
+      };
+
+      delete question.correct_answer;
+      delete question.incorrect_answers;
+
+      return question;
+    });
+
+    dispatch(fetchQuestions(questions));
   }
 );
 

@@ -11,16 +11,14 @@ export default class Ranking extends Component {
 
     return (
       <>
-        <ul>
-          {
-            players.length > 0 || players === null
-              ? players.map((player, index) => (
-                <PlayerRank key={ player.name } player={ player } index={ index } />
-              ))
-              : <h2>Nenhum jogo encontrado</h2>
-          }
-        </ul>
-
+        <h1 data-testid="ranking-title">Ranking</h1>
+        {
+          players.length > 0 || players === null
+            ? players.map((player, index) => (
+              <PlayerRank key={ player.name } player={ player } index={ index } />
+            ))
+            : <h2>Nenhum jogo encontrado</h2>
+        }
         <Link to="/">
           <button type="button" data-testid="btn-go-home">Tela de login</button>
         </Link>

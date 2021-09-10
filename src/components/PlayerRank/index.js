@@ -6,11 +6,11 @@ export default class PlayerRank extends Component {
     const { player, index } = this.props;
     const { name, score, picture } = player;
     return (
-      <li>
+      <div>
         <img src={ picture } alt="Icone do jogador" />
         <h3 data-testid={ `player-name-${index}` }>{name}</h3>
         <h3 data-testid={ `player-score-${index}` }>{`${score} pontos`}</h3>
-      </li>
+      </div>
     );
   }
 }
