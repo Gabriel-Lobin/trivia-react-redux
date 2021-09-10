@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FcEngineering } from 'react-icons/fc';
 import { fetchQuestionsThunk, fetchStartThunk, saveFormData } from '../../redux/actions';
 import './style.css';
+import Github from '../../components/Githubs';
 
 class Login extends React.Component {
   constructor() {
@@ -58,15 +59,13 @@ class Login extends React.Component {
     await this.setState({
       img: imgPerson,
     });
-
-    console.log(this.state);
-
     saveData(this.state);
     gameStart();
   }
 
   render() {
     const { nameLogin, emailLogin } = this.state;
+    const { history } = this.props;
     return (
       <main className="login-screen">
         <form>
@@ -106,6 +105,7 @@ class Login extends React.Component {
             <FcEngineering />
           </button>
         </form>
+        <Github history={ history } />
       </main>
     );
   }
