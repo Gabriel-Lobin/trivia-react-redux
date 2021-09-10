@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PlayerRank from '../../components/PlayerRank';
 
 export default class Ranking extends Component {
   render() {
-    const json = localStorage.getItem('state');
-    const player = JSON.parse(json);
-    const { name, score, img } = player.player;
+    const json = localStorage.getItem('ranking');
+    const players = JSON.parse(json);
+
+    players.sort((a, b) => b.score - a.score);
 
     return (
       <>
-        <img src={ img } alt="Icone do jogador" />
-        <h3 data-testid={ `player-name-${0}` }>{`Nome: ${name}`}</h3>
-        <h3 data-testid={ `player-score-${0}` }>{`${score} pontos`}</h3>
+        <ul data-testid="player-name">
+          {
+            players.length > 0 || players === null
+              ? players.map((player, index) => (
+                <PlayerRank key={ player.name } player={ player } index={ index } />
+              ))
+              : <h2>Nenhum jogo encontrado</h2>
+          }
+        </ul>
+
         <Link to="/">
           <button type="button" data-testid="btn-go-home">Tela de login</button>
         </Link>

@@ -6,6 +6,7 @@ import {
   STOP_CRONOMETER,
   BTN_NEXT,
   REVEAL_ANSWERS,
+  RESET_STATE_QUESTIONS,
 } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
@@ -43,19 +44,25 @@ const questions = (state = INITIAL_STATE, action) => {
     };
   case START_CRONOMETER:
     return {
-      ...state,
-      timer: true,
-      btnNext: false,
+      ...state, timer: true, btnNext: false,
     };
   case STOP_CRONOMETER:
     return {
-      ...state,
-      timer: false,
+      ...state, timer: false,
     };
   case BTN_NEXT:
     return {
+      ...state, btnNext: true,
+    };
+  case RESET_STATE_QUESTIONS:
+    return {
       ...state,
-      btnNext: true,
+      data: [],
+      currentQuestion: 0,
+      time: 30,
+      timer: true,
+      btnNext: false,
+      reveal: false,
     };
   default:
     return state;

@@ -11,6 +11,10 @@ import {
   SET_CHRONOMETER,
   SET_SCORE,
   SET_ASSERTION,
+  RESET_STATE_LOGIN,
+  RESET_STATE_QUESTIONS,
+  RESET_STATE_PLAYER,
+  RESET_STATE_TIMER,
 } from './actionTypes';
 
 const BASE_URL = 'https://opentdb.com/api.php';
@@ -70,6 +74,18 @@ export const stopCronometer = () => ({
 
 export const btnNext = () => ({
   type: BTN_NEXT,
+});
+
+export const resetStateLogin = () => ({
+  type: RESET_STATE_LOGIN,
+});
+
+export const resetStatePlayer = () => ({
+  type: RESET_STATE_PLAYER,
+});
+
+export const resetStateQuestions = () => ({
+  type: RESET_STATE_QUESTIONS,
 });
 
 export const fetchQuestionsThunk = ({ amount = BASE_AMOUNT, token }) => (

@@ -1,7 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchQuestionsThunk, fetchStartThunk, saveFormData } from '../../redux/actions';
+import {
+  fetchQuestionsThunk,
+  fetchStartThunk,
+  saveFormData,
+  resetStateLogin,
+  resetStatePlayer,
+  resetStateQuestions,
+} from '../../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -15,10 +22,15 @@ class Login extends React.Component {
     this.disabledButton = this.disabledButton.bind(this);
     this.startGame = this.startGame.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.resetSetState = this.resetSetState.bind(this);
+    this.resetLocalStorage = this.resetLocalStorage.bind(this);
+    this.resetStateGlobal = this.resetStateGlobal.bind(this);
   }
 
   componentDidMount() {
-    localStorage.setItem('ranking', JSON.stringify([]));
+    this.resetLocalStorage();
+    this.resetSetState();
+    this.resetStateGlobal();
   }
 
   componentDidUpdate() {
@@ -28,6 +40,36 @@ class Login extends React.Component {
       localStorage.setItem('token', token);
       history.push('/game');
     }
+  }
+
+  async resetLocalStorage() {
+    const json = localStorage.getItem('ranking');
+    const currentStorage = JSON.parse(json);
+
+    if (currentStorage === null) {
+      localStorage.setItem('ranking', JSON.stringify([]));
+    }
+    await localStorage.setItem('token', 'token');
+    await localStorage.setItem('state', 'state');
+  }
+
+  resetSetState() {
+    this.setState({
+      nameLogin: '',
+      emailLogin: '',
+      img: '',
+    });
+  }
+
+  resetStateGlobal() {
+    const {
+      resetStateLoginReducer,
+      resetStatePlayerReducer,
+      resetStateQuestionsReducer,
+    } = this.props;
+    resetStateLoginReducer();
+    resetStatePlayerReducer();
+    resetStateQuestionsReducer();
   }
 
   handleClick() {
@@ -60,8 +102,6 @@ class Login extends React.Component {
     await this.setState({
       img: imgPerson,
     });
-
-    console.log(this.state);
 
     saveData(this.state);
     gameStart();
@@ -126,6 +166,9 @@ Login.propTypes = {
     push: PropTypes.func,
   }).isRequired,
   saveData: PropTypes.func.isRequired,
+  resetStateLoginReducer: PropTypes.func.isRequired,
+  resetStatePlayerReducer: PropTypes.func.isRequired,
+  resetStateQuestionsReducer: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
 };
 
@@ -133,6 +176,9 @@ const mapDispatchToProps = (dispatch) => ({
   getQuestions: ({ token }) => dispatch(fetchQuestionsThunk({ token })),
   saveData: (state) => dispatch(saveFormData(state)),
   gameStart: () => dispatch(fetchStartThunk()),
+  resetStateLoginReducer: () => dispatch(resetStateLogin()),
+  resetStatePlayerReducer: () => dispatch(resetStatePlayer()),
+  resetStateQuestionsReducer: () => dispatch(resetStateQuestions()),
 });
 
 const mapStateToProps = (state) => ({
