@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import BtnRanking from '../btnRanking';
+import BtnRanking from '../BtnRanking';
 
 import './style.css';
 
@@ -28,13 +28,22 @@ class GameHeader extends Component {
       <header className="game-header">
         <img
           data-testid="header-profile-picture"
-          src={this.localStorageValidation()}
+          src={ this.localStorageValidation() }
           alt="Imagem do jogador"
         />
 
         <div className="group-score-name">
-          <h2 data-testid="header-player-name"> Jogador: {nome}</h2>
-          <h2 data-testid="header-score">{score}pts. </h2>
+          <h2 data-testid="header-player-name">
+            {' '}
+            Jogador:
+            {' '}
+            {nome}
+          </h2>
+          <h2 data-testid="header-score">
+            {score}
+            pts.
+            {' '}
+          </h2>
         </div>
 
         <Link to="/ranking">

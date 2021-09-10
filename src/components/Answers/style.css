@@ -20,18 +20,18 @@
 }
 
 .answers .correct-answer {
+  background: rgba(6, 240, 15, 0.5);
   border: 3px solid rgb(6, 240, 15);
-  background: rgba(6, 240, 15, .5);
   box-shadow: 0 0 8px 4px rgba(6, 240, 15, 0.329);
 }
 
 .answers .wrong-answer {
-  border: 3px solid red;
   background: rgba(255, 0, 0, 0.5);
+  border: 3px solid red;
   box-shadow: 0 0 8px 4px rgba(255, 0, 0, 0.329);
 }
 
 .next-btn {
-  position: absolute;
   bottom: 20%;
+  position: absolute;
 }
