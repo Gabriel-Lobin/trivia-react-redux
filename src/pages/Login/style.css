@@ -45,13 +45,13 @@
 
 .login-screen .settings-btn {
   background: none;
-  border:none;
+  border: none;
   color: rgba(242, 228, 34, 1);
   position: absolute;
   right: 30px;
   top: 30px;
-  transform: scale(3.0);
   transition: all 300ms;
+  transform: scale(3.0);
 }
 
 .login-screen .settings-btn:hover {
@@ -64,11 +64,13 @@
 }
 
 @keyframes BtnRotate {
+
   from {
-    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
   } 
+  
   to {
-    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
   }
 }
 
