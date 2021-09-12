@@ -37,7 +37,9 @@ export default class Ranking extends Component {
     return (
       <>
         <div className="header">
-          <img src={ Logo } alt="logotipo do site" className="logotipo" />
+          <Link to="/">
+            <img src={ Logo } alt="logotipo do site" className="logotipo" />
+          </Link>
           <div>
             <h1 data-testid="ranking-title">Ranking</h1>
           </div>
