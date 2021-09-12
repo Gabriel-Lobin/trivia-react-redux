@@ -93,7 +93,7 @@ Answers.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentQuestion: state.questions.currentQuestion,
-  time: state.questions.time,
+  time: state.timer.time,
   btnNextValue: state.questions.btnNext,
 });
 

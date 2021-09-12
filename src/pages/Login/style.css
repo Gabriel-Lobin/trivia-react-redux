@@ -58,6 +58,26 @@
   transform: scale(3.3);
 }
 
+.login-screen .settings-btn svg {
+  height: 100%;
+  transition: all 300ms;
+}
+
+@keyframes BtnRotate {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.login-screen .settings-btn svg:hover {
+  animation: BtnRotate 3s linear infinite;
+}
+
 /* ToDo animação engrenagem girando */
 .login-screen .github {
   background-color: rgb(242, 56, 39);
