@@ -26,4 +26,4 @@ PlayerRank.propTypes = {
   index: PropTypes.number.isRequired,
   player: PropTypes.func.isRequired,
   ranking: PropTypes.number.isRequired,
-}
+};
