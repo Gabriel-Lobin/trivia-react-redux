@@ -1,0 +1,20 @@
+.player {
+  background-color: white;
+  border-radius: 20px;
+  color: #020126;
+  display: flex;
+  justify-content: space-around;
+  margin: 1%;
+  width: 80%;
+}
+
+.player-ranking, .player-icon {
+  padding: 1%;
+  width: 8%;
+}
+
+.player-name, .player-score {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
